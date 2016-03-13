@@ -1,0 +1,46 @@
+###
+# Default configuration:
+#     Stores default configuration object for application. Most values
+#     will have to be overridden for development, testing, or production
+#     environments. Objects that *must* be overridden will be captioned
+#     with an @override tag.
+###
+
+
+###
+# Knex database configuration to create database connections. The database, user,
+# pass, and options variables should be set as described in the documentation
+# of Sequelize as specified at:
+#     http://knexjs.org/
+###
+knex:
+  debug: true,
+  client: "mysql"
+  connection:
+    host     : "127.0.0.1"
+    user     : "root"
+    password : ""
+    database : "um"
+    charset  : "utf8"
+    collate  : "utf8_general_ci"
+    pool:
+      min: 2
+      max: 10
+    migrations:
+      tableName: "knex_migrations"
+
+###
+# Logging configuration for application. Only directory for logs
+# configurable thus far.
+###
+seneca:
+  role: "auth"
+  limit: 50
+  port: 10102
+
+###
+# Logging configuration for application. Only directory for logs
+# configurable thus far.
+###
+logging:
+  directory: "./logs"
