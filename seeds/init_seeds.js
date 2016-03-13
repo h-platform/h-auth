@@ -1,8 +1,8 @@
 exports.seed = function(knex, Promise) {
     return Promise.all([
         // Inserts seed entries
-        knex('um_user').insert({username: 'admin', email: 'admin@gmail.com', display_name: 'System Administrator'}),
-        knex('um_user').insert({username: 'user', email: 'user@gmail.com', display_name: 'System User'}),
+        knex('um_user').insert({username: 'admin', email: 'admin@gmail.com', display_name: 'System Administrator', password: '1234'}),
+        knex('um_user').insert({username: 'user', email: 'user@gmail.com', display_name: 'System User', password: '1234'}),
         
         knex('um_permission').insert({id: 1, action: 'manage', resource: 'category'}),
         knex('um_permission').insert({id: 2, action: 'manage', resource: 'queue'}),

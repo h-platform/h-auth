@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.string('google_id');
     table.string('username').unique();
     table.string('email').unique();
+    table.string('password');
     table.string('display_name');
   }).then(function() {
     return knex.schema.createTable('um_permission', function(table) {

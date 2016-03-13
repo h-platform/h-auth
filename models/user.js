@@ -7,8 +7,8 @@ module.exports = bookshelf.Model.extend({
   schema: [
     Fields.StringField('username'),
     Fields.StringField('email'),
-    Fields.StringField('facebookId'),
-    Fields.StringField('googleId'),
-    Fields.StringField('displayName')
+    Fields.StringField('facebook_id'),
+    Fields.StringField('google_id'),
+    Fields.StringField('display_name')
   ]
 });

@@ -23,6 +23,7 @@ for(i = 0 ; i < count ; i++){
     username: users[i],
     email: users[i] + '@example.com',
     display_name: users[i] + ' ' + users[i],
+    password: '1234',
   };
 
   records.push(record);
