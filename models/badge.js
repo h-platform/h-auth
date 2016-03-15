@@ -4,14 +4,6 @@ var models = require('../models');
 
 module.exports = bookshelf.Model.extend({ 
   tableName: 'um_badge',
-  
-  initialize: function(attributes, options) {
-    this.on('saving', this.beforeSave);
-  },
-
-  beforeSave: function(model, attrs, options){
-    //do some actions before saving the model
-  },
 
   role: function() {
     return this.belongsTo(models.role);

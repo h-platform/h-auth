@@ -24,33 +24,38 @@ module.exports = [{
         .forge(whereClause)
         .fetch()
         .then(function(record) {
-            if(!record) {
+            if(!record || record === null) {
+                l.info('User email not found, creating new user record:' + args.data.email );
+                var values = _.pick(args.data, ['email','facebook_id','display_name']);
                 record = Models[config.model].forge();
-                l.log('user email not found, creating new user record:' + args.data.email );
             }
-        
+
+            // console.log(args.data);
+            // console.log(record);
+            
+            record.set('facebook_activated', 1);
             if(args.data.facebook_id) {
-                record.attributes.facebook_id = args.data.facebook_id;
+                record.set('facebook_id', args.data.facebook_id);
             }
     
             if(args.data.google_id) {
-                record.attributes.google_id = args.data.google_id;
+                record.set('google_id', args.data.google_id);
             }
     
             if(args.data.email) {
-                record.attributes.email = args.data.email;
+                record.set('email', args.data.email);
             }
     
             if(args.data.username) {
-                record.attributes.username = args.data.email;
+                record.set('username', args.data.username);
             }
     
             if(args.data.display_name) {
-                record.attributes.display_name = args.data.display_name;
+                record.set('display_name', args.data.display_name);
             }
         
             if(record.hasChanged()){
-                l.log('User data has changes, saving to db: ' + args.data.email);
+                l.info('Saving user data to db: ' + args.data.email);
                 return record.save();
             } else {
                 return record;
@@ -62,30 +67,12 @@ module.exports = [{
       }
     }, {
         pattern: { role: config.role, model: config.model, cmd:'validate' }, 
-        action: function (args, callback) {
-            if((!args.data.username && !args.data.email) || !args.data.password) {
-                l.log('username or email parameters are required for user validation');
-                return callback('email or username parameter are required');
-            }
-        
-            whereClause = {};
-            
-            if(args.data.email) {
-                whereClause.email = args.data.email;
-            }
-            
-            if(args.data.username) {
-                whereClause.username = args.data.username;
-            }
-        
-            whereClause.password = args.data.password;
-        
-            Models[config.model]
-            .forge(whereClause)
-            .fetch()
-            .then(function(record) {
-                return callback(null, { user: record} );
+        action: function (args, callback) {        
+            Models[config.model].login(args.data)
+            .then(function(foundUser) {
+                return callback(null, { user: foundUser.toJSON()} );
             }).catch(function(err){
+                console.log(err);
                 return callback(err);
             });
         }

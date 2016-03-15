@@ -2,7 +2,13 @@ var glob = require("glob");
 var l = require('./logger.js');
 var _ = require('lodash');
 
-glob("./models/*.js", {}, function (er, files) {
+// Tracks status of registration.
+//    * undefined = in progress
+//    * false = failed
+//    * true = succeeded
+var status = undefined;
+
+glob("./models/*.js", {}, function (err, files) {
   // files is an array of filenames.
   _.each(files, function(file){
     var model_name = _.camelCase(file);

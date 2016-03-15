@@ -1,12 +1,24 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('um_user', function(table) {
     table.increments('id').primary();
-    table.string('facebook_id');
-    table.string('google_id');
     table.string('username').unique();
     table.string('email').unique();
-    table.string('password');
+    table.text('password');
     table.string('display_name');
+    table.string('facebook_id');
+    table.string('google_id');
+    table.boolean('email_activated');
+    table.boolean('facebook_activated');
+    table.boolean('google_activated');
+  }).then(function() {
+    return knex.schema.createTable('um_activation_token', function(table) {
+      table.increments('id').primary();
+      table.string('token');
+      table.string('email');
+      table.boolean('consumed');
+      table.datetime('consumed_at');
+      table.timestamps();
+    });  
   }).then(function() {
     return knex.schema.createTable('um_permission', function(table) {
       table.increments('id').primary();

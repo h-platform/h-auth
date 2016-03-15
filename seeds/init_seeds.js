@@ -1,9 +1,5 @@
 exports.seed = function(knex, Promise) {
     return Promise.all([
-        // Inserts seed entries
-        knex('um_user').insert({username: 'admin', email: 'admin@gmail.com', display_name: 'System Administrator', password: '1234'}),
-        knex('um_user').insert({username: 'user', email: 'user@gmail.com', display_name: 'System User', password: '1234'}),
-        
         knex('um_permission').insert({id: 1, action: 'manage', resource: 'category'}),
         knex('um_permission').insert({id: 2, action: 'manage', resource: 'queue'}),
         knex('um_permission').insert({id: 3, action: 'manage', resource: 'status'}),
@@ -19,5 +15,5 @@ exports.seed = function(knex, Promise) {
         knex('um_badge').insert({user_id: 1, role_id: 1})
     ]).then(function(result){
         console.log('Done');
-    });
+    });;
 };

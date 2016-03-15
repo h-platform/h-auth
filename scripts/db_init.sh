@@ -6,7 +6,9 @@ mysql -u root -e 'CREATE DATABASE um DEFAULT CHARACTER SET utf8 DEFAULT COLLATE 
 
 knex migrate:rollback
 knex migrate:latest
+
+node generators/users
+
 knex seed:run
 
-node generators/user
 
