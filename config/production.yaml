@@ -1,0 +1,11 @@
+###
+# Production Environment
+###
+
+
+###
+# knex connection overide password
+###
+knex:
+  connection:
+    password : "123456"

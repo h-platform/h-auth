@@ -1,0 +1,11 @@
+###
+# Development Environment
+###
+
+
+###
+# knex connection overide password
+###
+knex:
+  connection:
+    password : ""
